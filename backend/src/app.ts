@@ -4,8 +4,8 @@ import cors from 'cors';
 import productRouter from './routers/products';
 import path from 'path';
 import orderRouter from './routers/orders';
-import errorHandler from 'middleware/error-handler';
-import { errorLogger, requestLogger } from 'middleware/logger';
+import errorHandler from './middleware/error-handler';
+import { errorLogger, requestLogger } from './middleware/logger';
 
 const app = express();
 mongoose.connect('mongodb://127.0.0.1:27017/weblarek')
