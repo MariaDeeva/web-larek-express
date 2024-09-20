@@ -14,7 +14,8 @@ interface OrderRequest {
     items: string[];
 
 
-}const isValidEmail = (email: string) => /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+}
+const isValidEmail = (email: string) => /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
 const isValidPhone = (phone: string) => /^\+7\d{10}$/.test(phone);
 
 const createOrder = async (req: Request, res: Response, next: NextFunction) => {
