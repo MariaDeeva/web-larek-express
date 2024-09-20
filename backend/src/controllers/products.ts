@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import Product,{ IProduct }  from '../models/product';
+import Product, { IProduct } from '../models/product';
 import { Error as MongooseError } from 'mongoose';
 import BadRequestError from '../errors/bad-request-error';
 import ConflictError from '../errors/conflict-error';
