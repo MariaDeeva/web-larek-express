@@ -3,21 +3,17 @@ import { Request, Response, NextFunction } from 'express';
 import Product from '../models/product';
 import BadRequestError from '../errors/bad-request-error';
 import ConflictError from '../errors/conflict-error';
-import InternalServerError from '../errors/internal-server-error';
 
 interface OrderRequest {
-    payment: 'card' | 'online';
-    email: string;
-    phone: string;
-    address: string;
+   
     total: number;
     items: string[];
 
 
 }
+
 const createOrder = async (req: Request, res: Response, next: NextFunction) => {
-    const { payment, email, phone, address, total, items }: OrderRequest = req.body;
-    const phoneFormatted: string = phone.replace(/[^\d+]/g, '');
+    const { total, items }: OrderRequest = req.body;
   
     try {
       const products = await Product.find({ _id: { $in: items } });
@@ -45,7 +41,7 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
       if (error instanceof Error && error.message.includes('E11000')) {
         return next(new ConflictError('Ошибка значения поля'));
       }
-      return next(new InternalServerError((error as Error).message));
+      next(error);
     }
   };
   

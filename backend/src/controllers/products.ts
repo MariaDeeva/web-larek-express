@@ -3,14 +3,14 @@ import Product, { IProduct } from '../models/product';
 import { Error as MongooseError } from 'mongoose';
 import BadRequestError from '../errors/bad-request-error';
 import ConflictError from '../errors/conflict-error';
-import InternalServerError from '../errors/internal-server-error';
+
 
 export const getAllProducts = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const products = await Product.find();
     res.status(200).send({ items: products, total: products.length });
   } catch (error) {
-    return next(new InternalServerError((error as Error).message));
+    next(error);
   }
 };
 
@@ -27,6 +27,6 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
     if (error instanceof Error && error.message.includes('E11000')) {
       return next(new ConflictError('Такой товар уже существует'));
     }
-    return next(new InternalServerError((error as Error).message));
+    next(error);
   }
 };
