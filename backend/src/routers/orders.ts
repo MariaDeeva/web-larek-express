@@ -4,6 +4,6 @@ import express from 'express';
 
 const router = express.Router();
 
-router.post('/order', createOrderValidator, createOrder);
+router.post('/', createOrderValidator, createOrder);
 
 export default router;

@@ -9,8 +9,8 @@ export const getAllProducts = async (_req: Request, res: Response, next: NextFun
   try {
     const products = await Product.find();
     res.status(200).send({ items: products, total: products.length });
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    return next(new InternalServerError((error as Error).message));
   }
 };
 
@@ -27,6 +27,6 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
     if (error instanceof Error && error.message.includes('E11000')) {
       return next(new ConflictError('Такой товар уже существует'));
     }
-    return next(new InternalServerError('Не удалось создать продукт'));
+    return next(new InternalServerError((error as Error).message));
   }
 };

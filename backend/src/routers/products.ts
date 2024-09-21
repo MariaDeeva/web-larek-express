@@ -3,7 +3,7 @@ import express from 'express';
 
 const router = express.Router();
 
-router.get('/product', getAllProducts);
-router.post('/product', createProduct);
+router.get('/', getAllProducts);
+router.post('/', createProduct);
 
 export default router;
