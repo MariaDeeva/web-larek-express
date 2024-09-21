@@ -22,5 +22,6 @@ import { Request, Response, NextFunction } from 'express';
     }
   
     return res.status(500).json({ message: 'Internal server error' });
+    next(err);
   }
   export default errorHandler
