@@ -1,9 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import productRouter from './routers/products';
+import routers from './routers/index';
 import path from 'path';
-import orderRouter from './routers/orders';
 import errorHandler from './middleware/error-handler';
 import { errorLogger, requestLogger } from './middleware/logger';
 
@@ -14,8 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(requestLogger);
-app.use('/product', productRouter);
-app.use('/order', orderRouter);
+app.use('/', routers);
 
 app.use(errorHandler);
 app.use(errorLogger);
